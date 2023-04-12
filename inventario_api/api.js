@@ -5,7 +5,7 @@ const config = require('./config')
 
 const api = asyncify(express.Router())
 
-let services, Producto
+let services, Producto, Cliente, Empleado, Marca, Proveedor, Rol, Tienda, Venta
 
 api.use('*', async (req, res, next) => {
   if (!services) {
@@ -17,10 +17,20 @@ api.use('*', async (req, res, next) => {
     }
     console.log(services)
     Producto = services.Producto
+    Cliente = services.Cliente
+    Empleado = services.Empleado
+    Marca = services.Proveedor
+    Proveedor = services.Proveedor
+    Rol = services.Rol
+    Tienda = services.Tienda
+    Venta = services.Venta
   }
   next()
 })
 
+/**
+ * API para productos
+ */
 api.get('/productos',async (req, res, next) => {
   console.log('Entre a /productos')
   let productos = []
@@ -32,5 +42,24 @@ api.get('/productos',async (req, res, next) => {
   }
   res.send(productos)
 })
+
+api.post('/create/producto', async(req, res, next) => {
+  console.log('entre a /create/producto')
+  let data = req.body
+  let result
+
+  try {
+    result = await Producto.createOrUpdate(data)
+  } catch (error) {
+    next(error)
+  }
+
+  res.status(200).send(result)
+})
+
+
+/**
+ * API para cliente
+ */
 
 module.exports = api

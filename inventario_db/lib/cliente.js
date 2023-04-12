@@ -1,6 +1,24 @@
 'use strict'
 
-module.exports = function setupCliente (ClienteModel) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
+module.exports = function setupCliente (ClienteModel) {
+  async function createOrUpdate (client) {
+    const cond = {
+      where: {
+        id: client.id
+      }
+    }
+
+    const existingClient = await ClienteModel.findOne(cond)
+
+    if (existingClient) {
+      const updated = await ClienteModel.update(client, cond)
+      return updated ? ClienteModel.findOne(cond) : existingClient
+    }
+
+    const result = await ClienteModel.create(client)
+    return result.toJSON()
+  }
+
   function findById (id) {
     return ClienteModel.findById(id) // <nombreTablaModel>
   }
@@ -10,6 +28,7 @@ module.exports = function setupCliente (ClienteModel) { //cambio el setup<nombre
   }
 
   return {
+    createOrUpdate,
     findById,
     findAll
   }
