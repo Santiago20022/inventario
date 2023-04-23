@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Funcion para conectarse a la base de datos
+ */
 const Sequelize = require('sequelize')
 let sequelize = null
 

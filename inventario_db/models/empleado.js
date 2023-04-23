@@ -30,13 +30,5 @@ module.exports = function setupEmpleadoModel(config) { // Cambiar nombre de la f
       type: Sequelize.STRING,
       allowNull: false
     },
-    id_rol: {
-      type: Sequelize. INTEGER,
-      allowNull: false
-    },
-    id_tienda: {
-      type: Sequelize. INTEGER,
-      allowNull: false
-    }
   })
 }

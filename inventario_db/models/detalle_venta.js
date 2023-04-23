@@ -10,13 +10,5 @@ module.exports = function setupDetalle_VentaModel(config) { // Cambiar nombre de
       type: Sequelize.INTEGER,
       allowNull: false // false: NO puede ser nulo, true SI puede ser nulo
     },
-    id_producto: {
-      type: Sequelize.INTEGER, //INT -> abreviacion de INTEGER
-      allowNull: false
-    },
-    id_venta: {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    }
   })
 }

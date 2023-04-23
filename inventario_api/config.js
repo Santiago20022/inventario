@@ -8,8 +8,5 @@ module.exports = {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'mysql',
     logging: s => console.log(s)
-
   }
 }
-
-

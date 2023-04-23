@@ -2,13 +2,13 @@
 
 module.exports = function setupMarca (MarcaModel) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
   async function createOrUpdate (marca) {
-    const cond = {
+    const cond = marca.id ? ({
       where: {
         id: marca.id
       }
-    }
+    }) : null
 
-    const existingMarca = await MarcaModel.findOne(cond)
+    const existingMarca = cond ? await MarcaModel.findOne(cond) : null
 
     if (existingMarca) {
       const updated = await MarcaModel.update(marca, cond)

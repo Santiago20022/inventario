@@ -2,13 +2,13 @@
 
 module.exports = function setupProveedor (ProveedorModel) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
   async function createOrUpdate (proveedor) {
-    const cond = {
+    const cond = proveedor.id ? ({
       where: {
         id: proveedor.id
       }
-    }
+    }) : null
 
-    const existingProveedor = await ProveedorModel.findOne(cond)
+    const existingProveedor = cond ? await ProveedorModel.findOne(cond) : null
 
     if (existingProveedor) {
       const updated = await ProveedorModel.update(proveedor, cond)

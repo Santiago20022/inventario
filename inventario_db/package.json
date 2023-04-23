@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "node setup.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "debug": "^4.3.4",
     "defaults": "^1.0.3",
+    "minimist": "^1.2.8",
     "mysql2": "^2.3.3",
     "sequelize": "^6.23.0"
   },
