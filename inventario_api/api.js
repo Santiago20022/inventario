@@ -109,11 +109,24 @@ api.post('/create/client', async(req, res, next) => {
   let empleados = []
 
   try {
-    empleados = await Empleados.findAll()   
+    empleados = await Empleado.findAll()   
   } catch (e) {
     next(e)
   }
   res.send(empleados)
+})
+
+api.get('/empleado/:id',async (req, res, next) => {
+  console.log('Entre a /empleado/:id')
+  const { id } = req.params
+  let empleado = {}
+
+  try {
+    empleado = await Empleado.findById(id)   
+  } catch (e) {
+    next(e)
+  }
+  res.send(empleado)
 })
 
 api.post('/create/empleado', async(req, res, next) => {
@@ -128,6 +141,20 @@ api.post('/create/empleado', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/empleado', async(req, res, next) => {
+  console.log('entre a /delete/empleado')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Empleado.deleteEmpleado(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 /**
@@ -145,6 +172,19 @@ api.post('/create/empleado', async(req, res, next) => {
   res.send(marcas)
 })
 
+api.get('/marca/:id',async (req, res, next) => {
+  console.log('Entre a /marca/:id')
+  const { id } = req.params
+  let marca = {}
+
+  try {
+    marca = await Marca.findById(id)   
+  } catch (e) {
+    next(e)
+  }
+  res.send(marca)
+})
+
 api.post('/create/marca', async(req, res, next) => {
   console.log('entre a /create/marca')
   let data = req.body
@@ -157,6 +197,20 @@ api.post('/create/marca', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/marca', async(req, res, next) => {
+  console.log('entre a /delete/marca')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Marca.deleteMarca(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 /**
@@ -174,6 +228,19 @@ api.post('/create/marca', async(req, res, next) => {
   res.send(proveedores)
 })
 
+api.get('/proveedor/:id',async (req, res, next) => {
+  console.log('Entre a /proveedor/:id')
+  const { id } = req.params
+  let proveedor = {}
+
+  try {
+    proveedor = await Proveedor.findById(id)   
+  } catch (e) {
+    next(e)
+  }
+  res.send(proveedor)
+})
+
 api.post('/create/proveedor', async(req, res, next) => {
   console.log('entre a /create/proveedor')
   let data = req.body
@@ -186,6 +253,20 @@ api.post('/create/proveedor', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/proveedor', async(req, res, next) => {
+  console.log('entre a /delete/proveedor')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Proveedor.deleteProveedor(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 /**
@@ -203,6 +284,19 @@ api.post('/create/proveedor', async(req, res, next) => {
   res.send(roles)
 })
 
+api.get('/rol/:id',async (req, res, next) => {
+  console.log('Entre a /rol/:id')
+  const { id } = req.params
+  let rol = {}
+
+  try {
+    rol = await Rol.findById(id)   
+  } catch (e) {
+    next(e)
+  }
+  res.send(rol)
+})
+
 api.post('/create/rol', async(req, res, next) => {
   console.log('entre a /create/rol')
   let data = req.body
@@ -215,6 +309,20 @@ api.post('/create/rol', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/rol', async(req, res, next) => {
+  console.log('entre a /delete/rol')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Rol.deleteRol(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 /**
@@ -232,6 +340,19 @@ api.post('/create/rol', async(req, res, next) => {
   res.send(tiendas)
 })
 
+api.get('/tienda/:id',async (req, res, next) => {
+  console.log('Entre a /tienda/:id')
+  const { id } = req.params
+  let tienda = {}
+
+  try {
+    tienda = await Tienda.findById(id)   
+  } catch (e) {
+    next(e)
+  }
+  res.send(tienda)
+})
+
 api.post('/create/tienda', async(req, res, next) => {
   console.log('entre a /create/tienda')
   let data = req.body
@@ -244,6 +365,20 @@ api.post('/create/tienda', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/tienda', async(req, res, next) => {
+  console.log('entre a /delete/tienda')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Tienda.deleteTienda(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 /**
@@ -273,6 +408,20 @@ api.post('/create/venta', async(req, res, next) => {
   }
 
   res.status(200).send(result)
+})
+
+api.delete('/delete/venta', async(req, res, next) => {
+  console.log('entre a /delete/venta')
+  console.log(req.body)
+  let { id } = req.body
+
+  try {
+    await Venta.deleteVenta(id)
+  } catch (error) {
+    next(error)
+  }
+
+  res.sendStatus(200)
 })
 
 module.exports = api
