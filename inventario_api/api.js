@@ -104,7 +104,7 @@ api.post('/create/client', async(req, res, next) => {
 /**
  * API para empleados
  */
- api.get('/empleados',async (req, res, next) => {
+api.get('/empleados',async (req, res, next) => {
   console.log('Entre a /empleados')
   let empleados = []
 
@@ -160,7 +160,7 @@ api.delete('/delete/empleado', async(req, res, next) => {
 /**
  * API para marca
  */
- api.get('/marcas',async (req, res, next) => {
+api.get('/marcas',async (req, res, next) => {
   console.log('Entre a /marcas')
   let marcas = []
 
@@ -216,7 +216,7 @@ api.delete('/delete/marca', async(req, res, next) => {
 /**
  * API para proveedor
  */
- api.get('/proveedores',async (req, res, next) => {
+api.get('/proveedores',async (req, res, next) => {
   console.log('Entre a /proveedores')
   let proveedores = []
 
@@ -272,7 +272,7 @@ api.delete('/delete/proveedor', async(req, res, next) => {
 /**
  * API para rol
  */
- api.get('/roles',async (req, res, next) => {
+api.get('/roles',async (req, res, next) => {
   console.log('Entre a /roles')
   let roles = []
 
@@ -328,7 +328,7 @@ api.delete('/delete/rol', async(req, res, next) => {
 /**
  * API para tienda
  */
- api.get('/tiendas',async (req, res, next) => {
+api.get('/tiendas',async (req, res, next) => {
   console.log('Entre a /tiendas')
   let tiendas = []
 
