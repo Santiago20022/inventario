@@ -108,7 +108,7 @@ module.exports = async function (config) { // Permite importar con require en ot
    * Los libs son las funciones que contienen los CRUD para cada tabla
    */
   const Producto = setupProducto(ProductoModel)
-  const Empleado = setupEmpleado(EmpleadoModel)
+  const Empleado = setupEmpleado(EmpleadoModel, sequelize)
   const Cliente = setupCliente(ClienteModel)
   const DetallePedido = setupDetallePedido(DetallePedidoModel)
   const DetalleVenta = setupDetalleVenta(DetalleVentaModel)

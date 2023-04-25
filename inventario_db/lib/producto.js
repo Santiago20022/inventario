@@ -20,7 +20,7 @@ module.exports = function setupProducto (ProductoModel) { //cambio el setup<nomb
   }
 
   function findById (id) {
-    return ProductoModel.findById(id) // <nombreTablaModel>
+    return ProductoModel.findByPk(id) // <nombreTablaModel>
   }
 
   function findAll () {

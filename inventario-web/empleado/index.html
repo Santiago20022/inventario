@@ -1,0 +1,54 @@
+<!-- 
+  Este archivo sirve para listar todos los proveedores, es decir, el READ de un CRUD
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../nav.css">
+    <link rel="stylesheet" href="../estilos.css">
+    <title>Todos los empleados</title>
+</head>
+<body>
+  <header class="header">
+    <nav class="navegacion">
+      <ul class="lista_padre">
+        <li><a href="index.html" class="selected">Empleados</a></li>
+        <li><a href="../marca/index.html">marcas</a></li>
+        <li><a href="../proveedor/index.html">proveedores</a></li>
+        <li><a href="../roles/index.html">roles</a></li>
+        <li><a href="../tienda/index.html">tiendas</a></li>
+        <li><a href="">
+          <img src="https://lh3.googleusercontent.com/a/AEdFTp4cbvEgxTErh_gxe26CE7tLdONKayu0nPERmrgs-HU=s32" alt="">
+        </a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="action-container">
+      <button class="crear" onclick="window.location.href='crearEmpleado.html'">Crear empleado</button>
+    </div>
+    <table id="empleados" class="data-table">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Cédula</td>
+          <td>Nombre y apellido</td>
+          <td>Dirección</td>
+          <td>Email</td>
+          <td>Rol</td>
+          <td>Acciones</td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="empleado.js"></script>
+  <script>
+    getEmpleados()
+  </script>
+</body>
+</html>

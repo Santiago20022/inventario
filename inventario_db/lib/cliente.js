@@ -20,7 +20,7 @@ module.exports = function setupCliente (ClienteModel) {
   }
 
   function findById (id) {
-    return ClienteModel.findById(id) // <nombreTablaModel>
+    return ClienteModel.findByPk(id) // <nombreTablaModel>
   }
 
   function findAll () {

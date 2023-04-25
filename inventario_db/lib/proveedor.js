@@ -20,16 +20,23 @@ module.exports = function setupProveedor (ProveedorModel) { //cambio el setup<no
   }
 
   function findById (id) {
-    return ProveedorModel.findById(id) // <nombreTablaModel>
+    return ProveedorModel.findByPk(id) // <nombreTablaModel>
   }
 
   function findAll () {
     return ProveedorModel.findAll()
   }
 
+  function deleteProveedor(id) {
+    return ProveedorModel.destroy({
+      where: { id }
+    })
+  }
+
   return {
     createOrUpdate,
     findById,
-    findAll
+    findAll,
+    deleteProveedor,
   }
 }

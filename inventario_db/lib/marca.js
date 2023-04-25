@@ -20,16 +20,23 @@ module.exports = function setupMarca (MarcaModel) { //cambio el setup<nombreTabl
   }
 
   function findById (id) {
-    return MarcaModel.findById(id) // <nombreTablaModel>
+    return MarcaModel.findByPk(id) // <nombreTablaModel>
   }
 
   function findAll () {
     return MarcaModel.findAll()
   }
 
+  function deleteMarca(id) {
+    return MarcaModel.destroy({
+      where: { id }
+    })
+  }
+
   return {
     createOrUpdate,
     findById,
-    findAll
+    findAll,
+    deleteMarca,
   }
 }

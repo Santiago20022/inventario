@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="../estilos.css">
   <title></title>
 </head>
 <body>
@@ -20,7 +20,10 @@
           <input type="text" required id="descripcion">
           <label for="">descripcion</label>
         </div>
-        <button onclick="saveMarca()">Guardar</button>
+        <div class="btn-container">
+          <button onclick="updateMarca()">Actualizar</button>
+          <button onclick="window.location.href='index.html'">Regresar</button>
+        </div>
       </div>
     </div>
   </section>
@@ -28,5 +31,8 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="marca.js"></script>
+  <script>
+    getMarca()
+  </script>
 </body>
 </html>

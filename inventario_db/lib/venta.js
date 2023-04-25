@@ -20,7 +20,7 @@ module.exports = function setupVenta (VentaModel) { //cambio el setup<nombreTabl
   }
 
   function findById (id) {
-    return VentaModel.findById(id) // <nombreTablaModel>
+    return VentaModel.findByPk(id) // <nombreTablaModel>
   }
 
   function findAll () {
