@@ -31,6 +31,10 @@ const http = axios; // Axios es una libreria que me permite hacer peticiones al 
   window.location.href='index.html'
 }
 
+/**
+ * updateMarca
+ * Funcion que actualiza los datos de una marca. Es el mismo saveMarca para se le envia el ID de la marca
+ */
 async function updateMarca() {
   const id = params.id
 

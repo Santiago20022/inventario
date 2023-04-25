@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../estilos.css">
+  <title>Crear una tienda</title>
+</head>
+<body>
+  <section>
+    <div class="caja_formulario">
+      <div class="form-value">
+        <h2>Tiendas</h2>
+        <div class="inputbox">
+          <input type="text" required id="razon_social">
+          <label for="">Razón social</label>
+        </div>
+        <div class="inputbox">
+          <input type="text" required id="direccion">
+          <label for="">direccion</label>
+        </div>
+        <div class="inputbox">
+          <input type="text" required id="telefono">
+          <label for="">telefono</label>
+        </div>
+        <div class="inputbox">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="email" required id="email">
+          <label for="">email</label>
+        </div>
+        <div class="btn-container">
+          <button onclick="updateTienda()">Actualizar</button>
+          <button onclick="window.location.href='index.html'">Regresar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="tienda.js"></script>
+  <script>
+      getTienda()
+  </script>
+</body>
+</html>

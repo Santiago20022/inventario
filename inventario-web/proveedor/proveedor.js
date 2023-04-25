@@ -1,6 +1,16 @@
 const http = axios;
 
 /**
+ * Con esta linea se obtiene parametros de una URL, por ejemplo:
+ * localhost/empleado?id=1
+ * El parametro de la url es id y su valor es 1, para obtenerlos hacemos
+ * const value = params.id; // "1"
+ */
+ const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+
+/**
  * deleteProveedor
  * Funcion que se encarga de borrar proveedores de la base de datos
  */
@@ -16,6 +26,67 @@ const http = axios;
   } catch (error) {
     console.log("Error borrando proveedor -->", error)
     alert("Hubo un error borrando el proveedor, por favor intente mas tarde")
+  }
+}
+
+/**
+ * getProveedor
+ * Obtiene solo un proveedor de la base de datos
+ */
+ async function getProveedor() {
+  const id = params.id
+  if (id) {
+    try {
+      const result = await http.get(`http://localhost:3000/api/proveedor/${id}`)
+      const proveedor = result.data
+      document.getElementById("direccion").value = proveedor.direccion
+      document.getElementById("nombre").value = proveedor.nombre
+      document.getElementById("telefono").value = proveedor.telefono
+      document.getElementById("email").value = proveedor.email
+    } catch (error) {
+      console.log(error)
+      alert("Hubo un error trayendo un proveedor, por favor intente mas tarde")
+    }
+    return
+  }
+  window.location.href='index.html'
+}
+
+/**
+ * updateProveedor
+ * Funcion que actualiza los datos de un proveedor. Es el mismo saveProveedor para se le envia el ID del proveedor
+ */
+async function updateProveedor() {
+  const id = params.id
+
+  if(id) {
+    const direccionInput = document.getElementById("direccion")
+    const nombreInput = document.getElementById("nombre")
+    const telefonoInput = document.getElementById("telefono")
+    const emailInput = document.getElementById("email")
+    const direccion = direccionInput.value
+    const nombre = nombreInput.value
+    const telefono = telefonoInput.value
+    const email = emailInput.value
+
+    try {
+      const result = await http.post('http://localhost:3000/api/create/proveedor', {
+        id,
+        nombre,
+        direccion,
+        telefono,
+        email
+      })
+
+      if (result.status === 200) {
+        alert("Proveedor actualizado correctamente")
+      } else {
+        alert("Hubo un error actualizando un proveedor, por favor intentalo de nuevo")
+      }
+    } catch(e) {
+      console.error(e)
+      alert("Hubo un error actualizando un proveedor, por favor intentalo de nuevo")
+    }
   }
 }
 
@@ -98,7 +169,7 @@ async function saveProveedor() {
       direccionInput.value = ""
       telefonoInput.value = ""
       emailInput.value = ""
-      alert("Proveedor creada correctamente")
+      alert("Proveedor creado correctamente")
     } else {
       alert("Hubo un error creando un proveedor, por favor intentalo de nuevo")
     }

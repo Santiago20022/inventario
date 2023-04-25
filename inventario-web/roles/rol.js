@@ -1,7 +1,71 @@
 const http = axios; // Axios es una libreria que me permite hacer peticiones al API, es decir a inventario_api
 
-async function updateRol() {
+/**
+ * Con esta linea se obtiene parametros de una URL, por ejemplo:
+ * localhost/empleado?id=1
+ * El parametro de la url es id y su valor es 1, para obtenerlos hacemos
+ * const value = params.id; // "1"
+ */
+ const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
 
+/**
+ * getRol
+ * Obtiene solo un rol de la base de datos
+ */
+ async function getRol() {
+  const id = params.id
+  if (id) {
+    try {
+      const result = await http.get(`http://localhost:3000/api/rol/${id}`)
+      const rol = result.data
+      document.getElementById("nombre").value = rol.nombre
+      document.getElementById("descripcion").value = rol.descripcion
+    } catch (error) {
+      console.log(error)
+      alert("Hubo un error trayendo un rol, por favor intente mas tarde")
+    }
+    return
+  }
+  window.location.href='index.html'
+}
+
+/**
+ * updateRol
+ * Funcion que actualiza los datos de un rol. Es el mismo saveRol para se le envia el ID del rol
+ */
+async function updateRol() {
+  const id = params.id
+
+  if (id) {
+    const nombreInput = document.getElementById("nombre")
+    const descriptionInput = document.getElementById("descripcion")
+    const nombre = nombreInput.value
+    const descripcion = descriptionInput.value
+
+    try {
+      const result = await http.post('http://localhost:3000/api/create/rol', {
+        id,
+        nombre,
+        descripcion
+      })
+      
+      /**
+       * 200: Todo salio bien y la marca se creo
+       * 500: Hubo un error de servidor en inventario_api
+       * 400: Posiblemente se enviaron mal los datos, es decir, en este caso por ejemplo se pudo no enviar algun campo de la tabla marca
+       */
+      if (result.status === 200) {
+        alert("Rol actualizado correctamente")
+      } else {
+        alert("Hubo un error actualizando el rol, por favor intentalo de nuevo")
+      }
+    } catch(e) {
+      console.error(e)
+      alert("Hubo un error actualizando el rol, por favor intentalo de nuevo")
+    }
+  }
 }
 
 /**
