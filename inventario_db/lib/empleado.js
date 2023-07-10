@@ -25,7 +25,16 @@ module.exports = function setupEmpleado (EmpleadoModel, sequelize) { //cambio el
     return EmpleadoModel.findByPk(id) // <nombreTablaModel>
   }
 
-  function findAll () {
+  function findAll (filter) {
+    let filterCondition = ''
+    if (filter) {
+      filterCondition = `
+        AND (t1.cedula LIKE '%${filter}%'
+          OR t1.nombre LIKE '%${filter}%'
+          OR t1.apellido LIKE '%${filter}%'
+          OR t1.email LIKE '%${filter}%')
+      `
+    }
     return sequelize.query(`
       SELECT
         t1.id,
@@ -38,7 +47,8 @@ module.exports = function setupEmpleado (EmpleadoModel, sequelize) { //cambio el
       FROM
         empleados t1,
         rols t2
-      WHERE t1.rolId = t2.id`,
+      WHERE t1.rolId = t2.id
+      ${filterCondition}`,
       { type: sequelize.QueryTypes.SELECT}
     )
   }

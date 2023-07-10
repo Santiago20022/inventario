@@ -1,3 +1,13 @@
+window.addEventListener('load', function() {
+  document.getElementById('search-empleado').addEventListener('keyup', debounce(async (e) => {
+    if (e.target.value) {
+      return await getEmpleados(`?filter=${e.target.value}`)
+    }
+    await getEmpleados()
+  }, 500))
+})
+
+
 const http = axios; // Axios es una libreria que me permite hacer peticiones al API, es decir a inventario_api
 
 /**
@@ -9,6 +19,20 @@ const http = axios; // Axios es una libreria que me permite hacer peticiones al 
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
+
+/**
+ * Funcion que espera a que un usuario termine de realizar una accion (como escribir) antes
+ * de llamar al API, de esta manera no llamamos al API muchas veces si no las veces necesarias
+ */
+function debounce(callback, wait) {
+  let timerId;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+}
 
 /**
  * deleteEmpleado
@@ -24,7 +48,7 @@ async function deleteEmpleado(id) {
     alert("Empleado borrado correctamente")
     window.location.reload()
   } catch (error) {
-    console.log("Error borrando empleadp -->", error)
+    console.log("Error borrando empleado -->", error)
     alert("Hubo un error borrando el empleado, por favor intente mas tarde")
   }
 }
@@ -96,10 +120,11 @@ async function getEmpleado() {
  * getEmpleados
  * Funcion que retorna todos los empleados con sus roles y los pinta en una tabla
  */
-async function getEmpleados() {
+async function getEmpleados(filters = '') {
   try {
-    const result = await http.get('http://localhost:3000/api/empleados')
+    const result = await http.get(`http://localhost:3000/api/empleados${filters}`)
     const tablaEmpleados = document.getElementById("empleados")
+    tablaEmpleados.replaceChildren()
     /**
      * 200: Todo salio bien y la marca se creo
      * 500: Hubo un error de servidor en inventario_api

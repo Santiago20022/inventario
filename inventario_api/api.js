@@ -105,11 +105,12 @@ api.post('/create/client', async(req, res, next) => {
  * API para empleados
  */
 api.get('/empleados',async (req, res, next) => {
+  const { filter } = req.query
   console.log('Entre a /empleados')
   let empleados = []
 
   try {
-    empleados = await Empleado.findAll()   
+    empleados = await Empleado.findAll(filter)   
   } catch (e) {
     next(e)
   }
