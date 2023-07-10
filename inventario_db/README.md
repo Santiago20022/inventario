@@ -1,19 +1,19 @@
 ## Inventario DB
 Inventario db es un modulo que se encargará de crear la base de datos con todas sus relaciones, ademas de exportar el CRUD para cada entidad (entidad = tabla).
-
+.
 ## Cómo crear la base de datos
 Se debe ingresar a localhost/phpmyadmin (o desde la consola) y crear la base de datos manualmente (sin tablas). El nombre de la base de datos debe ser el mismo que se puso en el objeto de configuracion en setup.js
 
 ```
-{
+{ **
     database: 'inventario', // Nombre de la base de datos
     username: 'root',
-    password: 'root',
-    host: 'localhost',
-    dialect: 'mysql',
-    logging: s => console.log(s), 
+    password: 'root',**
+    host: 'localhost',**
+    dialect: 'mysql',**
+    logging: s => console.log(s), **
     setup: true
-}
+} .
 ```
 Luego, estando dentro del directorio/carpeta inventario_db correr el siguiente script:
 ```

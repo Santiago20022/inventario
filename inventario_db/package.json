@@ -13,7 +13,7 @@
     "debug": "^4.3.4",
     "defaults": "^1.0.3",
     "minimist": "^1.2.8",
-    "mysql2": "^2.3.3",
+    "mysql2": "^2.3.3", 
     "sequelize": "^6.23.0"
   },
   "devDependencies": {

@@ -47,7 +47,7 @@ module.exports = async function (config) { // Permite importar con require en ot
   // Un Rol puede pertenecer a uno o varios empleados
   RolModel.hasMany(EmpleadoModel) // hasMany = Puede tener uno o varios
   // Un empleado puede tener un rol
-  EmpleadoModel.belongsTo(RolModel) // belogsTo = puede tener uno
+  EmpleadoModel.belongsTo(RolModel) // belogsTo = pertenece a 
 
   // Un empleado puede tener una o varias ventas
   EmpleadoModel.hasMany(VentaModel)
