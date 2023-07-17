@@ -1,5 +1,4 @@
 'use strict'
-
 module.exports = function setupEmpleado (EmpleadoModel, sequelize) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
   async function createOrUpdate (empleado) {
     if (empleado.id) {

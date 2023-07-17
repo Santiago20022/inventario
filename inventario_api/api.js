@@ -163,10 +163,11 @@ api.delete('/delete/empleado', async(req, res, next) => {
  */
 api.get('/marcas',async (req, res, next) => {
   console.log('Entre a /marcas')
+  const { filter } = req.query
   let marcas = []
 
   try {
-    marcas = await Marca.findAll()   
+    marcas = await Marca.findAll(filter)   
   } catch (e) {
     next(e)
   }
@@ -219,10 +220,11 @@ api.delete('/delete/marca', async(req, res, next) => {
  */
 api.get('/proveedores',async (req, res, next) => {
   console.log('Entre a /proveedores')
+  const { filter } = req.query
   let proveedores = []
 
   try {
-    proveedores = await Proveedor.findAll()   
+    proveedores = await Proveedor.findAll(filter)   
   } catch (e) {
     next(e)
   }
@@ -275,10 +277,11 @@ api.delete('/delete/proveedor', async(req, res, next) => {
  */
 api.get('/roles',async (req, res, next) => {
   console.log('Entre a /roles')
+  const { filter } = req.query
   let roles = []
 
   try {
-    roles = await Rol.findAll()   
+    roles = await Rol.findAll(filter)   
   } catch (e) {
     next(e)
   }
@@ -331,10 +334,11 @@ api.delete('/delete/rol', async(req, res, next) => {
  */
 api.get('/tiendas',async (req, res, next) => {
   console.log('Entre a /tiendas')
+  const { filter } = req.query
   let tiendas = []
 
   try {
-    tiendas = await Tienda.findAll()   
+    tiendas = await Tienda.findAll(filter)   
   } catch (e) {
     next(e)
   }

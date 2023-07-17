@@ -1,5 +1,8 @@
 'use strict'
 
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 module.exports = function setupProducto (ProductoModel) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
   async function createOrUpdate (producto) {
     const cond = {
@@ -23,8 +26,18 @@ module.exports = function setupProducto (ProductoModel) { //cambio el setup<nomb
     return ProductoModel.findByPk(id) // <nombreTablaModel>
   }
 
-  function findAll () {
-    return ProductoModel.findAll()
+  function findAll (filter) {
+    let where = {}
+    if (filter) {
+      where = {
+        [Op.or]: [
+          { codigo: { [Op.like]: `%${filter}%` } },
+          { nombre: { [Op.like]: `%${filter}%` } },
+          { precio: { [Op.like]: `%${filter}%` } }
+        ]
+      }
+    }
+    return ProductoModel.findAll({ where })
   }
 
   return {

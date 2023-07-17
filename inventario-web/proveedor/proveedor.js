@@ -1,3 +1,12 @@
+window.addEventListener('load', function() {
+  document.getElementById('search-proveedor').addEventListener('keyup', debounce(async (e) => {
+    if (e.target.value) {
+      return await getProveedores(`?filter=${e.target.value}`)
+    }
+    await getProveedores()
+  }, 500))
+})
+
 const http = axios;
 
 /**
@@ -9,6 +18,20 @@ const http = axios;
  const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
+
+/**
+ * Funcion que espera a que un usuario termine de realizar una accion (como escribir) antes
+ * de llamar al API, de esta manera no llamamos al API muchas veces si no las veces necesarias
+ */
+function debounce(callback, wait) {
+  let timerId;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+}
 
 /**
  * deleteProveedor
@@ -94,10 +117,11 @@ async function updateProveedor() {
  * getProveedores
  * Funcion que obtiene todos los proveedores de la base de datos y los lista en una tabla
  */
-async function getProveedores() {
+async function getProveedores(filters = '') {
   try {
-    const result = await http.get('http://localhost:3000/api/proveedores')
+    const result = await http.get(`http://localhost:3000/api/proveedores${filters}`)
     const tablaProveedores = document.getElementById("proveedores")
+    tablaProveedores.replaceChildren()
     /**
      * 200: Todo salio bien y la marca se creo
      * 500: Hubo un error de servidor en inventario_api

@@ -1,5 +1,8 @@
 'use strict'
 
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 module.exports = function setupRol (RolModel) { //cambio el setup<nombreTabla> y el parametro <nombreTablaModel>
   async function createOrUpdate (rol) {
     if (rol.id) {
@@ -25,8 +28,16 @@ module.exports = function setupRol (RolModel) { //cambio el setup<nombreTabla> y
     return RolModel.findByPk(id) // <nombreTablaModel>
   }
 
-  function findAll () {
-    return RolModel.findAll()
+  function findAll (filter) {
+    let where = {}
+    if (filter) {
+      where = {
+        [Op.or]: [
+          { nombre: { [Op.like]: `%${filter}%` } }
+        ]
+      }
+    }
+    return RolModel.findAll({ where })
   }
 
   function deleteRol(id) {

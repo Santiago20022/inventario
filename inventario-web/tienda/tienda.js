@@ -1,3 +1,13 @@
+window.addEventListener('load', function() {
+  document.getElementById('search-tienda').addEventListener('keyup', debounce(async (e) => {
+    if (e.target.value) {
+      return await getTiendas(`?filter=${e.target.value}`)
+    }
+    await getTiendas()
+  }, 500))
+})
+
+
 const http = axios; // Axios es una libreria que me permite hacer peticiones al API, es decir a inventario_api
 
 /**
@@ -9,6 +19,20 @@ const http = axios; // Axios es una libreria que me permite hacer peticiones al 
  const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
+
+/**
+ * Funcion que espera a que un usuario termine de realizar una accion (como escribir) antes
+ * de llamar al API, de esta manera no llamamos al API muchas veces si no las veces necesarias
+ */
+function debounce(callback, wait) {
+  let timerId;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+}
 
 /**
  * getTienda
@@ -97,10 +121,11 @@ async function updateTienda() {
  * getTiendas
  * Funcion que se encarga de obtener todas la tiendas de la base de datos y listarlas en una tabla
  */
- async function getTiendas() {
+ async function getTiendas(filters = '') {
     try {
-      const result = await http.get('http://localhost:3000/api/tiendas')
+      const result = await http.get(`http://localhost:3000/api/tiendas${filters}`)
       const tablaTiendas = document.getElementById("tiendas")
+      tablaTiendas.replaceChildren()
       /**
        * 200: Todo salio bien y la marca se creo
        * 500: Hubo un error de servidor en inventario_api
