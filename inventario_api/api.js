@@ -105,7 +105,7 @@ api.post('/create/client', async(req, res, next) => {
  * API para empleados
  */
 api.get('/empleados',async (req, res, next) => {
-  const { filter } = req.query
+  const { filter } = req.query //todo lo que esta despues del signo de pregunta en una url por ejm ?filter=ffdgffd
   console.log('Entre a /empleados')
   let empleados = []
 
@@ -219,8 +219,8 @@ api.delete('/delete/marca', async(req, res, next) => {
  * API para proveedor
  */
 api.get('/proveedores',async (req, res, next) => {
-  console.log('Entre a /proveedores')
   const { filter } = req.query
+  console.log('Entre a /proveedores')
   let proveedores = []
 
   try {
@@ -230,6 +230,8 @@ api.get('/proveedores',async (req, res, next) => {
   }
   res.send(proveedores)
 })
+
+
 
 api.get('/proveedor/:id',async (req, res, next) => {
   console.log('Entre a /proveedor/:id')
@@ -276,8 +278,8 @@ api.delete('/delete/proveedor', async(req, res, next) => {
  * API para rol
  */
 api.get('/roles',async (req, res, next) => {
+  const { filter } = req.query //todo lo que esta despues del signo de pregunta en una url por ejm ?filter=ffdgffd
   console.log('Entre a /roles')
-  const { filter } = req.query
   let roles = []
 
   try {
@@ -287,6 +289,10 @@ api.get('/roles',async (req, res, next) => {
   }
   res.send(roles)
 })
+
+
+
+
 
 api.get('/rol/:id',async (req, res, next) => {
   console.log('Entre a /rol/:id')

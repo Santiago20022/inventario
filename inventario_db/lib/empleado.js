@@ -26,7 +26,9 @@ module.exports = function setupEmpleado (EmpleadoModel, sequelize) { //cambio el
 
   function findAll (filter) {
     let filterCondition = ''
-    if (filter) {
+    //like significa "como" y recibe una expresion regular que es un doble porcentaje "%" y lo que haya en medio de esos 2 porcentajes
+    //lo va a evaluar y va a retornar lo que contenga esos caracteres
+    if (filter) { 
       filterCondition = `
         AND (t1.cedula LIKE '%${filter}%'
           OR t1.nombre LIKE '%${filter}%'

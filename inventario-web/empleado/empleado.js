@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
   document.getElementById('search-empleado').addEventListener('keyup', debounce(async (e) => {
-    if (e.target.value) {
+    if (e.target.value) { //dignifica me escribieron algo dentro del input?
       return await getEmpleados(`?filter=${e.target.value}`)
     }
     await getEmpleados()
@@ -124,7 +124,7 @@ async function getEmpleados(filters = '') {
   try {
     const result = await http.get(`http://localhost:3000/api/empleados${filters}`)
     const tablaEmpleados = document.getElementById("empleados")
-    tablaEmpleados.replaceChildren()
+    tablaEmpleados.replaceChildren() //esta borra todos los hijos de la tabla para volverla a crear
     /**
      * 200: Todo salio bien y la marca se creo
      * 500: Hubo un error de servidor en inventario_api
