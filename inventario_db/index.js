@@ -23,7 +23,6 @@ const setupVenta = require('./lib/venta')
 
 
 module.exports = async function (config) { // Permite importar con require en otro archivo, es decir, exporta una función
-  config = config
 
   /**
    * Configuracion de modelos: Los modelos son la definicion de una tabla de la base de datos, con sus campos y tipos.
